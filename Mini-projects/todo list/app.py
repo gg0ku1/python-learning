@@ -13,8 +13,11 @@ while True:
         print("Task added successfully!")
 
     elif choice == "2":
+        count = 1
         for task in tasks:
-            print(task)
+            print(count,task)
+            count += 1
+            
 
     elif choice == '3':
         print("Exiting the program. Goodbye!")
