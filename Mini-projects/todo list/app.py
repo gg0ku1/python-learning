@@ -3,7 +3,8 @@ tasks = []
 while True:
     print("1. Add a task")
     print("2. View Tasks")
-    print("3. Exit")
+    print("3. Delete task")
+    print("4. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -17,9 +18,13 @@ while True:
         for task in tasks:
             print(count,task)
             count += 1
-            
-
+    
     elif choice == '3':
+        delete = int(input("Enter task to delete:")) 
+        tasks.pop(delete - 1)   
+
+
+    elif choice == '4':
         print("Exiting the program. Goodbye!")
         break
 
