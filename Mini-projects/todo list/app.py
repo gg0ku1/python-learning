@@ -15,7 +15,7 @@ while True:
 
     elif choice == "2":
         count = 1
-        if tasks >= 1 :
+        if len(tasks) >= 1 :
             for task in tasks:
                 print(count,task)
                 count += 1
@@ -24,7 +24,7 @@ while True:
     
     elif choice == '3':
         delete = int(input("Enter task to delete:")) 
-        if delete <= 99:
+        if delete <= len(tasks):
             tasks.pop(delete - 1)
             print("Task deleted successfully!")
         else:
