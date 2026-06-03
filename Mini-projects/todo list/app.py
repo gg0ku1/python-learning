@@ -40,3 +40,15 @@ while True:
 
 
 #v1 complete
+
+
+#for v2 we use functions
+#replace all 4 features with function blocks
+
+def add_task():
+    pass
+
+def view_task():
+    pass
+
+def delete_task
