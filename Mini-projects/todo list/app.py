@@ -51,4 +51,5 @@ def add_task():
 def view_task():
     pass
 
-def delete_task
+def delete_task():
+    pass
