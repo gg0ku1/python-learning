@@ -6,6 +6,9 @@ tasks = []
 #for v2 we use functions
 #replace all 4 features with function blocks
 
+#for v3 we add file handling
+#save tasks to file and retrieve from file
+
 def add_task():
         task = input("Enter the task: ")
         tasks.append(task)
