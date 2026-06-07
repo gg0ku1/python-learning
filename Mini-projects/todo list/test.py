@@ -1,5 +1,13 @@
 file = open("tasks.txt", "w")
 
-file.write("Learn Python")
+file.write("Learn Python\n")
+file.write("Go Gym\n")
+file.write("Buy Milk\n")
 
 file.close()
+
+file = open("tasks.txt", "r")
+
+print(file.read())
+
+file.close
