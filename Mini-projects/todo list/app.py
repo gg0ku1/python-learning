@@ -1,6 +1,6 @@
 tasks = []
 file = open("tasks.txt", "r")
-tasks = file.readlines()
+tasks = file.readlines().strip()
 file.close()
 
     #v1 complete
@@ -11,15 +11,17 @@ file.close()
 
 #for v3 we add file handling
 #save tasks to file and retrieve from file
+def save_task():
+        file = open("tasks.txt", 'w')
+        for task in tasks:
+             file.write(task + "\n")
+        file.close()
 
 def add_task():
         task = input("Enter the task: ")
         tasks.append(task)
         print("Task added successfully!")
-        file = open("tasks.txt", 'w')
-        for task in tasks:
-             file.write(task)
-        file.close()
+        save_task()
 
 
 
@@ -39,6 +41,7 @@ def delete_task():
             print("Task deleted successfully!")
         else:
             print("invalid")
+        save_task()
 
 while True:
     print("1) Add a task")
