@@ -1,7 +1,16 @@
 tasks = []
 file = open("tasks.txt", "r")
-tasks = file.readlines().strip()
+tasks = file.readlines()
 file.close()
+
+
+clean_tasks = []
+
+for task in tasks:
+     task = task.strip()
+     clean_tasks.append(task)
+
+tasks = clean_tasks
 
     #v1 complete
 
