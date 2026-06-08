@@ -1,4 +1,7 @@
 tasks = []
+file = open("tasks.txt", "r")
+tasks = file.readlines()
+file.close()
 
     #v1 complete
 
@@ -13,6 +16,11 @@ def add_task():
         task = input("Enter the task: ")
         tasks.append(task)
         print("Task added successfully!")
+        file = open("tasks.txt", 'w')
+        for task in tasks:
+             file.write(task)
+        file.close()
+
 
 
 def view_task():
