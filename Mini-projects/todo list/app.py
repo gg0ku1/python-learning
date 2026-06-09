@@ -5,7 +5,7 @@ file.close()
 
 
 clean_tasks = []
-
+#for storing cleaned tasks without newline bug
 for task in tasks:
      task = task.strip()
      clean_tasks.append(task)
@@ -20,6 +20,7 @@ tasks = clean_tasks
 
 #for v3 we add file handling
 #save tasks to file and retrieve from file
+
 def save_task():
         file = open("tasks.txt", 'w')
         for task in tasks:
