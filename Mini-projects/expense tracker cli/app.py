@@ -12,6 +12,7 @@ while True:
 
     choice = input("Enter your choice: ")   
     if choice == '1':   
+        expense1 = input("enter expense")
         
 
 
@@ -21,6 +22,5 @@ while True:
         break
 
     else:
-        print("Invalid Choice")    
-    break
+        print("Invalid Choice") 
 
