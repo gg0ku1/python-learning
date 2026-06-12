@@ -1,6 +1,23 @@
-diction = {"fruit":"apple",
-           "fruit": "orange"}
+#diction = {"fruit":"apple",
+ #          "fruit": "orange"}
 
-#commiting  for streak just in case
 
-print(diction["fruit"])
+#print(diction["fruit"])
+
+#Expense Name: Lunch
+#Amount: 250
+#Category: Food
+
+
+expenses = [
+    {
+        "expense_name": "Lunch",
+        "amount": 250,
+        "category": "Food"
+    },
+    {
+        "expense_name": "Coffee",
+        "amount": 120,
+        "category": "Drink"
+    }
+]
