@@ -20,4 +20,11 @@ expenses = [
         "amount": 120,
         "category": "Drink"
     }
+
+        {
+        "expense_name": "Uber",
+        "amount": 300,
+        "category": "Transport"
+    }
 ]
+
