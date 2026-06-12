@@ -34,12 +34,11 @@ def view_expense():
             print("no expenses tracked")
 
 def view_total():
-    count1 = 0
+    total = 0
     for expense in expenses:
-        sum = count1 + expense["amount"]
-        count1 = sum
+        total += expense["amount"]
 
-    print(f"total spending = {sum}")
+    print(f"total spending = {total}")
 
 while True:
     print("*******************Expense Tracker************************")
