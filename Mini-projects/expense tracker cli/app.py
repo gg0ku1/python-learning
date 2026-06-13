@@ -40,6 +40,17 @@ def view_total():
 
     print(f"total spending = {total}")
 
+def delete_expense():
+     delete = int(input("enter expense to delete"))
+     if 0< delete <=len(expenses):
+          del expenses[delete - 1]
+          print("Expense deleted.")
+     else:
+          print("Invalid index.")
+          
+               
+          
+
 while True:
     print("*******************Expense Tracker************************")
     print("1) Add Expense")
@@ -57,6 +68,8 @@ while True:
         view_expense()
         view_total()
 
+    elif choice == '3':     
+         delete_expense()
 
     elif choice == '4':
         print("Exiting the program. Goodbye!")
