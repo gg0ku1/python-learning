@@ -1,5 +1,15 @@
 expenses= []
 
+file = open("expenses.txt","r")
+expenses = file.readlines()
+file.close()
+
+def save_expense():
+    file = open("expenses.txt", "w")
+    for expense in expenses:
+         file.write(expense)
+    file.close()
+
 def add_expense():
         exp1 = input("enter expense name: ")
         exp2 = int(input("enter expense amount: "))
