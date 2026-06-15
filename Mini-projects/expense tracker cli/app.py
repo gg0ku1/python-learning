@@ -1,13 +1,24 @@
 expenses= []
 
 file = open("expenses.txt","r")
-expenses = file.readlines()
+lines = file.readlines()
+for line in lines:
+    line = line.strip()
+    parts = line.split(",")
+    expense = {
+        "expense_name": parts[0],
+        "amount": int(parts[1]),
+        "category": parts[2]
+    }
+    expenses.append(expense)
+
 file.close()
 
 def save_expense():
     file = open("expenses.txt", "w")
     for expense in expenses:
-         file.write(expense)
+         line = f"{expense['expense_name']},{expense['amount']},{expense['category']}"
+         file.write(line + "\n")
     file.close()
 
 def add_expense():
@@ -24,7 +35,7 @@ def add_expense():
         }
 
         expenses.append(new_expense)
-
+        save_expense()
 
 def view_expense():
         if expenses:
@@ -55,8 +66,10 @@ def delete_expense():
      if 0< delete <=len(expenses):
           del expenses[delete - 1]
           print("Expense deleted.")
+          save_expense()
      else:
           print("Invalid index.")
+    
           
                
           
@@ -66,7 +79,8 @@ while True:
     print("1) Add Expense")
     print("2) View Expense")
     print("3) Delete Expense")
-    print("4) Exit")
+    print("4) View Total Spending")
+    print("5) Exit")
 
     choice = input("Enter your choice: ")   
 
@@ -80,8 +94,11 @@ while True:
 
     elif choice == '3':     
          delete_expense()
+    
+    elif choice == '4':     
+         view_total()
 
-    elif choice == '4':
+    elif choice == '5':
         print("Exiting the program. Goodbye!")
         break
 
