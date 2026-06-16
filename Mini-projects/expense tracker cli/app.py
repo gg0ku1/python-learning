@@ -12,6 +12,13 @@ for line in lines:
     }
     expenses.append(expense)
 
+'''
+so this is v1 , v2 done. completed basic expense tracking and then file handling.
+learnt new concepts like dictionary, split(), fstrings
+
+now before moving on, i would like to implement try and except in this project as v3
+
+'''
 file.close()
 
 def save_expense():
@@ -70,9 +77,6 @@ def delete_expense():
      else:
           print("Invalid index.")
     
-          
-               
-          
 
 while True:
     print("*******************Expense Tracker************************")
