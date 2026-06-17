@@ -1,7 +1,8 @@
+num = input("enter number")
+
 try:
-    num = input("enter number")
+    num = int(num)
+    print(num)
 except:
     print("enter valid input")
 
-int(num) = num
-print(num)
