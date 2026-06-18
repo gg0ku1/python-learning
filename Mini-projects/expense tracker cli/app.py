@@ -30,7 +30,14 @@ def save_expense():
 
 def add_expense():
         exp1 = input("enter expense name: ")
-        exp2 = int(input("enter expense amount: "))
+        while True:
+
+            try:
+                exp2 = int(input("enter expense amount: "))
+                break
+            except:
+                print("not a valid number")
+        
         exp3 = input("enter expense category: ")
 
 
@@ -69,13 +76,16 @@ def view_total():
     print(f"total spending = {total}")
 
 def delete_expense():
-     delete = int(input("enter expense to delete"))
-     if 0< delete <=len(expenses):
+     try:
+        delete = int(input("enter expense to delete"))
+        if 0< delete <=len(expenses):
           del expenses[delete - 1]
           print("Expense deleted.")
           save_expense()
-     else:
-          print("Invalid index.")
+        else:
+            print("invalid index")
+     except:
+          print("please enter valid number")
     
 
 while True:
