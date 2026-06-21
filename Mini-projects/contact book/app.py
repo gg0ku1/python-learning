@@ -4,13 +4,13 @@ with open("contacts.txt","r") as file:
     lines = file.readlines()
 
     for line in lines:
-        lines.strip()
-        parts = lines.split(",")
+        line = line.strip()
+        parts = line.split(",")
 
         contact = {
             "contact name":parts[0],
             "contact number":parts[1],
-            "contact email":part[2]
+            "contact email":parts[2]
         }
         contacts.append(contact)
 
