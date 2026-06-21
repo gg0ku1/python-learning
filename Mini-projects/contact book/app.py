@@ -1,5 +1,19 @@
 contacts = []
 
+with open("contacts.txt","r") as file:
+    lines = file.readlines()
+
+    for line in lines:
+        lines.strip()
+        parts = lines.split(",")
+
+        contact = {
+            "contact name":parts[0],
+            "contact number":parts[1],
+            "contact email":part[2]
+        }
+        contacts.append(contact)
+
 
 
 def add_contact():
@@ -42,7 +56,7 @@ def delete_contact():
             print("invalid entry")
     except(ValueError):
         print("please enter valid number")
-        
+
     save_contact()
 
 def search_contact():
