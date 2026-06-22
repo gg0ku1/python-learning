@@ -1,20 +1,13 @@
+import json
+
 contacts = []
 
-with open("contacts.txt","r") as file:
-    lines = file.readlines()
+try:
+    with open("contacts.json", "r") as file:
+        contacts = json.load(file)
 
-    for line in lines:
-        line = line.strip()
-        parts = line.split(",")
-
-        contact = {
-            "contact name":parts[0],
-            "contact number":parts[1],
-            "contact email":parts[2]
-        }
-        contacts.append(contact)
-
-
+except FileNotFoundError:
+    contacts = []
 
 def add_contact():
     print ("enter contact details ")
@@ -31,10 +24,8 @@ def add_contact():
     save_contact()
 
 def save_contact():
-    with open("contacts.txt","w") as file:
-        for contact in contacts:
-            line = (f"{contact["contact name"]},{contact["contact number"]},{contact["contact email"]}")
-            file.write(line + "\n")
+    with open("contacts.json","w") as file:
+        json.dump(contacts, file)
 
 
 def view_contact():
@@ -64,7 +55,7 @@ def search_contact():
     found = False
     for contact in contacts:
        if contact["contact name"] == search:
-           print(f'your contact is:{contact["contact name"]}|{contact["contact number"]}|{contact["contact email"]} ')
+           print(f'your contact is: {contact["contact name"]}|{contact["contact number"]}|{contact["contact email"]} ')
            found = True
 
     if found == False:
@@ -76,7 +67,7 @@ while True:
 
     print("Enter choice")
     print("1. Add Contact")
-    print("2. View Contact")
+    print("2. View Contacts")
     print("3. Search Contact")
     print("4. Delete Contact")
     print("5. Exit")
