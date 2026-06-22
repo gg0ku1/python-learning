@@ -1,7 +1,7 @@
 expenses= []
 
-file = open("expenses.txt","r")
-lines = file.readlines()
+with open("expenses.txt", "r") as file:
+    lines = file.readlines()
 for line in lines:
     line = line.strip()
     parts = line.split(",")
@@ -19,7 +19,6 @@ learnt new concepts like dictionary, split(), fstrings
 now before moving on, i would like to implement try and except in this project as v3
 
 '''
-file.close()
 
 def save_expense():
     file = open("expenses.txt", "w")
@@ -35,7 +34,7 @@ def add_expense():
             try:
                 exp2 = int(input("enter expense amount: "))
                 break
-            except:
+            except ValueError:
                 print("not a valid number")
         
         exp3 = input("enter expense category: ")
@@ -84,7 +83,7 @@ def delete_expense():
           save_expense()
         else:
             print("invalid index")
-     except:
+     except ValueError:
           print("please enter valid number")
     
 
