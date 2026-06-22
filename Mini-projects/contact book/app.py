@@ -12,7 +12,7 @@ except FileNotFoundError:
 def add_contact():
     print ("enter contact details ")
     contact_name = input("enter name: ")
-    phone_number = int(input("enter number: "))
+    phone_number = input("enter number: ")
     contact_email = input("enter email: ")
 
     new_contact = {"contact name":contact_name,
@@ -45,7 +45,7 @@ def delete_contact():
             print("contact deleted successfully")
         else:
             print("invalid entry")
-    except(ValueError):
+    except ValueError:
         print("please enter valid number")
 
     save_contact()
