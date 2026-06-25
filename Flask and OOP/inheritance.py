@@ -16,10 +16,12 @@ class Animal:
         print(f"{self.name} is sleeping")
 
 class Dog(Animal):
-    pass
+    def speak(self):
+        print("WOOF")
 
 class cat(Animal):
-    pass
+    def speak(self):
+        print("meow")
 
 Husky = Dog("Scooby")
 Persian = cat("Garfield")
@@ -27,3 +29,6 @@ Persian = cat("Garfield")
 print(Husky.name)
 
 Persian.sleep()
+
+Persian.speak()
+
