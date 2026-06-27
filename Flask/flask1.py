@@ -7,3 +7,7 @@ def home():
     return "Hello World!"
 
 app.run(debug=True)
+
+@app.route("/about")
+def about():
+    return "This is the About page."
