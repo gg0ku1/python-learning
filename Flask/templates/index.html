@@ -5,9 +5,16 @@
 </head>
 <body>
 
-<h1>Hello Gokul!</h1>
+<h1>Hello {{name}}!</h1>
 
 <p>This page came from Flask.</p>
+
+<p>i have a bunch of fruits</p>
+<p>they include:</p>
+<p>{%for fruit in fruits%}
+        {{fruit}}
+    {%endfor%}
+</p>
 
 </body>
 </html>
