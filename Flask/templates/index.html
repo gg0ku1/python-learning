@@ -11,10 +11,12 @@
 
 <p>i have a bunch of fruits</p>
 <p>they include:</p>
-<p>{%for fruit in fruits%}
-        {{fruit}}
-    {%endfor%}
-</p>
+<ul>
+
+{%for fruit in fruits%}
+<li>{{fruit}}</li>  
+{%endfor%}
+</ul>
 
 </body>
 </html>
