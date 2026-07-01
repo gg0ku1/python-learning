@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Second Flask Page</title>
-</head>
-<body>
+<form action="/submit">
 
-<h1>Personal Biodata</h1>
+    <label>Name:</label><br>
+    <input type="text" name="name"><br><br>
 
-<p> name of user is {{name}}</p>
- <p>age of user is {{age}}</p>   
- <p>city of user is {{city}} </p>
+    <label>Phone:</label><br>
+    <input type="text" name="phone"><br><br>
 
- <P> user age next year will be {{age + 1}}</P>
+    <label>Email:</label><br>
+    <input type="text" name="email"><br><br>
+
+    <button>Submit</button>
+    
 
 
-</body>
-</html>
+</form>
