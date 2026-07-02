@@ -10,6 +10,5 @@ def pat1(n):
             print("*", end = " ")
         print()
 
-n = 4
-
-pat1(n)
+ok = int(input("enter num"))
+pat1(ok)
