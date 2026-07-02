@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -6,8 +6,14 @@ app = Flask(__name__)
 def form():
     return render_template("forms.html")
 
-@app.route("/submit")
+@app.route("/submit", methods = ["POST"])
 def submit():
-     return "data submitted"
+     name = request.form["name"]
+     phone = request.form["phone"]
+     email = request.form["email"]
+
+     return f"hello {name}"
+
+
 
 app.run()
