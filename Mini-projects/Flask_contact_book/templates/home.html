@@ -1,22 +1,15 @@
 {% extends "base.html" %}
 
-{%block content%}
-<form action="/add" method = "POST">
+{% block content %}
 
-    <label>Name:</label><br>
-    <input type="text" name="name"><br><br>
+<h1>Welcome to Contact Book</h1>
 
-    <label>Phone:</label><br>
-    <input type="text" name="phone"><br><br>
+<h3>Select an action</h3>
 
-    <label>Email:</label><br>
-    <input type="text" name="email"><br><br>
+<a href="{{url_for ('add_page')}}">Add Contact</a>
 
-    <button>Submit</button>
-    
+<br><br>
 
-
-</form>
-
+<a href="{{url_for ('view_page')}}">View Contacts</a>
 
 {% endblock %}
