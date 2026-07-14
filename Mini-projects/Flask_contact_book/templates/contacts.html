@@ -3,12 +3,21 @@
 
 <h1>Contacts:</h1>
 
-
+<ol>
 {% for contact in contacts%}
-   <ol>
-        <li>{{contact["name"]}} | {{contact["phone"]}} | {{contact["email"]}}</li>
-    </ol>
+   
+        <li>{{contact["name"]}} | {{contact["phone"]}} | {{contact["email"]}}
+             <a href="{{ url_for('delete_page', index=loop.index0) }}">
+        Delete
+    </a>
+        </li>
+    
 
 {% endfor %}
+</ol>
+
+<br><br>
+
+<a href="{{url_for ('home')}}">Home Page</a>
 
 {% endblock %}
