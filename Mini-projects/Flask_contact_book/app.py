@@ -1,8 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, json
 
 app = Flask(__name__)
 
 contacts = []
+
+try:
+    with open("contacts.json", "r") as file:
+        contacts = json.load(file)
+
+except FileNotFoundError:
+    contacts = []
 
 @app.route("/")
 def home():
@@ -20,6 +27,7 @@ def add():
     new_contact = {"name":name, "phone":phone, "email":email}
     contacts.append(new_contact)
     print(contacts)
+    save_contacts()
     return redirect(url_for("home"))
 
 @app.route("/contacts")
@@ -29,7 +37,12 @@ def view_page():
 @app.route("/delete/<int:index>")
 def delete_page(index):
     del contacts[index]
+    save_contacts()
     return redirect(url_for("view_page"))
+
+def save_contacts():
+    with open("contacts.json","w") as file:
+        json.dump(contacts, file)
 
 
 if __name__ == "__main__":
