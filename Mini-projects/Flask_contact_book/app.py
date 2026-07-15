@@ -24,8 +24,16 @@ def add():
     name = request.form["name"]
     phone = request.form["phone"]
     email = request.form["email"]
+    name = name.strip()
+    phone = phone.strip()
+    email = email.strip()
+
+    if not name or not phone or not email:
+        return("invalid input, please fill all fields correctly")
+    
     new_contact = {"name":name, "phone":phone, "email":email}
     contacts.append(new_contact)
+
     print(contacts)
     save_contacts()
     return redirect(url_for("home"))
