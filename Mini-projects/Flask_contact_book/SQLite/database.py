@@ -1,34 +1,67 @@
 import sqlite3
-connection = sqlite3.connect("contacts.db")
 
-print("Database connected!")
+def create_database():
+    connection = sqlite3.connect("contacts.db")
 
-cursor = connection.cursor()
+    cursor = connection.cursor()
 
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS contacts (
-    id INTEGER PRIMARY KEY,
-    name TEXT,
-    phone TEXT,
-    email TEXT
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS contacts (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        phone TEXT,
+        email TEXT
+    )
+    """)
+
+    connection.commit()
+
+    connection.close()
+
+def add_contact(name, phone, email):
+    connection = sqlite3.connect("contacts.db")
+
+    cursor = connection.cursor()
+
+    cursor.execute("""
+    INSERT INTO contacts
+    (name, phone, email)
+    VALUES
+    (?,?,?)
+    """,
+    (name, phone, email))
+
+    connection.commit()
+
+    connection.close()
+
+def get_contacts():
+
+    connection = sqlite3.connect("contacts.db")
+
+    cursor = connection.cursor()
+    
+    cursor.execute("SELECT * FROM contacts")
+    rows = cursor.fetchall()
+
+    connection.close()
+
+    return rows
+
+def delete_contact(id):
+    connection = sqlite3.connect("contacts.db")
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+    """
+    DELETE FROM contacts
+    WHERE id = ?
+    """,
+    (id,)
 )
-""")
+    
 
-connection.commit()
+    connection.commit()
+    connection.close()
 
-cursor.execute("""
-INSERT INTO contacts
-(name, phone, email)
-VALUES
-("Alice","12345","alice@gmail.com")
-""")
-
-cursor.execute("SELECT * FROM contacts")
-rows = cursor.fetchall()
-
-for row in rows:
-    print(f"id:{row[0]} \n name:{row[1]} \n phone:{row[2]}\n email:{row[3]}")
-
-connection.close()
-
-#ok
