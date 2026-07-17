@@ -25,6 +25,10 @@ VALUES
 
 cursor.execute("SELECT * FROM contacts")
 rows = cursor.fetchall()
-print(rows)
+
+for row in rows:
+    print(f"id:{row[0]} \n name:{row[1]} \n phone:{row[2]}\n email:{row[3]}")
 
 connection.close()
+
+#ok
