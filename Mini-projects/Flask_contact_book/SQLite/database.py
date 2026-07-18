@@ -65,3 +65,4 @@ def delete_contact(id):
     connection.commit()
     connection.close()
 
+#ok
