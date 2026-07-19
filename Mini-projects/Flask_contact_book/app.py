@@ -1,8 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, json
 
+from database import (
+    create_database,
+    add_contact,
+    get_contacts,
+    delete_contact
+)
+
 app = Flask(__name__)
 
-contacts = []
 
 try:
     with open("contacts.json", "r") as file:
