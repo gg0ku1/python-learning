@@ -10,12 +10,8 @@ from database import (
 app = Flask(__name__)
 
 
-try:
-    with open("contacts.json", "r") as file:
-        contacts = json.load(file)
+create_database()
 
-except FileNotFoundError:
-    contacts = []
 
 @app.route("/")
 def home():
@@ -36,27 +32,20 @@ def add():
 
     if not name or not phone or not email:
         return("invalid input, please fill all fields correctly")
-    
-    new_contact = {"name":name, "phone":phone, "email":email}
-    contacts.append(new_contact)
 
-    print(contacts)
-    save_contacts()
+    add_contact(name, phone, email)
     return redirect(url_for("home"))
 
 @app.route("/contacts")
 def view_page():
-    return render_template("contacts.html", contacts = contacts)
+    return render_template("contacts.html", contacts = get_contacts())
 
-@app.route("/delete/<int:index>")
-def delete_page(index):
-    del contacts[index]
-    save_contacts()
+@app.route("/delete/<int:id>")
+def delete_page(id):
+    delete_contact(id)
+
     return redirect(url_for("view_page"))
 
-def save_contacts():
-    with open("contacts.json","w") as file:
-        json.dump(contacts, file)
 
 
 if __name__ == "__main__":

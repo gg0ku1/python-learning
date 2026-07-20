@@ -6,8 +6,10 @@
     <ol>
     {% for contact in contacts%}
     
-            <li>{{contact["name"]}} | {{contact["phone"]}} | {{contact["email"]}}
-                <a href="{{ url_for('delete_page', index=loop.index0) }}">
+            <li>{{ contact[1] }}
+                {{ contact[2] }}
+                {{ contact[3] }}
+                <a href="{{ url_for('delete_page', id=contact[0]) }}">
             Delete
         </a>
             </li>
