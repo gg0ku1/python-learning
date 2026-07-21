@@ -65,4 +65,55 @@ def delete_contact(id):
     connection.commit()
     connection.close()
 
-#ok
+def get_contact(id):
+
+    connection = sqlite3.connect("contacts.db")
+
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+    """
+    SELECT * FROM contacts
+    WHERE id = ?
+
+   
+    """,
+    (id,)
+)
+    contact = cursor.fetchone()
+
+    
+
+    connection.close()
+
+    return contact
+
+def update_contact(id, name, phone, email):
+
+    connection = sqlite3.connect("contacts.db")
+
+
+    cursor = connection.cursor()
+    
+    cursor.execute(
+    """
+    UPDATE contacts
+
+    SET
+    name = ?,
+    phone = ?,
+    email = ?
+
+    WHERE id = ?
+
+    """,
+    (name, phone, email, id)
+
+    )
+    
+    connection.commit()
+
+    connection.close()
+
+    

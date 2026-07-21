@@ -4,7 +4,9 @@ from database import (
     create_database,
     add_contact,
     get_contacts,
-    delete_contact
+    delete_contact,
+    get_contact,
+    update_contact
 )
 
 app = Flask(__name__)
@@ -45,6 +47,29 @@ def delete_page(id):
     delete_contact(id)
 
     return redirect(url_for("view_page"))
+
+@app.route("/edit/<int:id>")
+def edit_page(id):
+    contact = get_contact(id)
+    return render_template("edit.html", contact=contact)
+
+@app.route("/edit/<int:id>", methods=["POST"])
+
+def edit(id):
+    name = request.form["name"]
+    phone = request.form["phone"]
+    email = request.form["email"]
+    name = name.strip()
+    phone = phone.strip()
+    email = email.strip()
+
+    if not name or not phone or not email:
+        return("no input")
+
+    update_contact(id,name, phone, email)
+    return redirect(url_for("view_page"))
+
+
 
 
 
