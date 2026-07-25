@@ -11,19 +11,45 @@
 </head>
 
 <body>
-    <h1>Contact Book</h1>
-    <hr>
-
 
 <div class="container mt-5">
 
-{% block content %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded mb-4">
 
-{% endblock %}
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                📇 Contact Book
+            </a>
+
+            <div>
+
+                <a class="btn btn-outline-light me-2"
+                href="{{ url_for('home') }}">
+                    Home
+                </a>
+
+                <a class="btn btn-outline-light me-2"
+                href="{{ url_for('view_page') }}">
+                    Contacts
+                </a>
+
+                <a class="btn btn-success"
+                href="{{ url_for('add_page') }}">
+                    Add Contact
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
 
 </div>
-
-</body>
 
 </body>
 

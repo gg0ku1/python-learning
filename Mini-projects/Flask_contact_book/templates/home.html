@@ -2,14 +2,26 @@
 
 {% block content %}
 
-<h1>Welcome to Contact Book</h1>
+<div class="text-center">
 
-<h3>Select an action</h3>
+    <h2 class="mb-4">
+        Welcome to Contact Book
+    </h2>
 
-<a href="{{url_for ('add_page')}}">Add Contact</a>
+    <p class="text-muted mb-4">
+        Store, edit and manage your contacts.
+    </p>
 
-<br><br>
+    <a href="{{ url_for('add_page') }}"
+       class="btn btn-success btn-lg me-3">
+        ➕ Add Contact
+    </a>
 
-<a href="{{url_for ('view_page')}}">View Contacts</a>
+    <a href="{{ url_for('view_page') }}"
+       class="btn btn-primary btn-lg">
+        📋 View Contacts
+    </a>
+
+</div>
 
 {% endblock %}
