@@ -23,6 +23,7 @@ def add_contact(name, phone, email):
 
     cursor = connection.cursor()
 
+
     cursor.execute("""
     INSERT INTO contacts
     (name, phone, email)
