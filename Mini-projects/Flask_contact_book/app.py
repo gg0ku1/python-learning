@@ -1,4 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, json
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    flash
+)
 
 from database import (
     create_database,
@@ -10,6 +17,7 @@ from database import (
 )
 
 app = Flask(__name__)
+app.secret_key = "supersecretkey"
 
 
 create_database()
@@ -36,7 +44,10 @@ def add():
         return("invalid input, please fill all fields correctly")
 
     add_contact(name, phone, email)
-    return redirect(url_for("home"))
+
+    flash("Contact added successfully!")
+
+    return redirect(url_for("view_page"))
 
 @app.route("/contacts")
 def view_page():
@@ -45,6 +56,8 @@ def view_page():
 @app.route("/delete/<int:id>")
 def delete_page(id):
     delete_contact(id)
+
+    flash("Contact deleted successfully!")
 
     return redirect(url_for("view_page"))
 
@@ -66,7 +79,10 @@ def edit(id):
     if not name or not phone or not email:
         return("no input")
 
-    update_contact(id,name, phone, email)
+    update_contact(id, name, phone, email)
+
+    flash("Contact updated successfully!")
+
     return redirect(url_for("view_page"))
 
 
@@ -76,4 +92,4 @@ def edit(id):
 if __name__ == "__main__":
     app.run(debug=True)
 
-    
+
