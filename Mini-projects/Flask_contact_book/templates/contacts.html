@@ -55,10 +55,23 @@
 
 {% else %}
 
-<p class="text-muted">
-    No contacts added yet.
-</p>
+<div class="text-center mt-5">
 
+    <h4 class="text-muted">
+        No contacts found.
+    </h4>
+
+    <p>
+        Start by adding your first contact.
+    </p>
+
+    <a
+        href="{{ url_for('add_page') }}"
+        class="btn btn-success">
+        Add Contact
+    </a>
+
+</div>
 {% endif %}
 
 {% endblock %}
