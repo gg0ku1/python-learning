@@ -1,3 +1,5 @@
+#brute force
+
 numb = 12345
 
 counter = 0 
@@ -6,3 +8,30 @@ while numb != 0:
     numb = numb // 10
 
 print(counter)
+
+
+
+
+
+
+
+
+
+
+# Time Complexity
+
+# How many times does the loop run?
+
+# For 12345, it runs 5 times.
+
+# For 987654321, it runs 9 times.
+
+# So it runs once per digit.
+
+# If the number has d digits:
+
+# Time: O(d)
+
+# You'll often see this written as:
+
+# O(log₁₀ N)
