@@ -10,3 +10,6 @@ while numb != 0:
 
 
 print(rev)
+
+# Time Complexity: O(log10(N))
+# Space Complexity: O(1)
