@@ -32,16 +32,16 @@ recur(n, 0)
 
 # Print N to 1 using Recursion
 
-# def recur(n, i):
-#     if i == 0:
-#         return
+def recur(n, i):
+    if i == 0:
+        return
 
-#     print(i)
-#     i -= 1
-#     recur(i)
-
-
-# i = int(input())   
+    print(i)
+    i -= 1
+    recur(i)
 
 
-# recur(i)
+i = int(input())   
+
+
+recur(i)
