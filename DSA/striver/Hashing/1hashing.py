@@ -20,3 +20,20 @@ for i in range(len(arr)):
 #Time: O(N²)
 
 
+#optimal using hashing
+
+freq = {}
+
+for i in range(len(arr)):
+    if arr[i] in freq:
+        freq[arr[i]] += 1
+    else:
+        freq[arr[i]] = 1
+
+print(freq)
+
+# Time:
+# Building dictionary → O(N)
+# Printing → O(K) (K = unique elements)
+
+# Overall: O(N)
