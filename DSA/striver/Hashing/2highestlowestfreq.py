@@ -10,17 +10,20 @@ for i in range(len(arr)):
 
 print(freq)
 
-highest = 0
-lowest = 0
+highest_element, highest_freq = list(freq.items())[0]
+lowest_element, lowest_freq = list(freq.items())[0]
+
 for key,value in freq.items():
-    if value > highest:
-        value = highest
+    if value > highest_freq:
+        highest_freq = value
+        highest_element = key
 
-    if value < lowest:
-        value = lowest
+    if value < lowest_freq:
+        lowest_freq = value
+        lowest_element = key
 
-    print(f"highest = {key(highest)},{highest}")
-    print(f"lowest = {key(lowest)},{lowest}")
+print(f"highest = {highest_element},{highest_freq}")
+print(f"lowest = {highest_element},{lowest_freq}")
         
 
         
