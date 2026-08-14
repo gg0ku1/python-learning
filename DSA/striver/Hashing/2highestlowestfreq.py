@@ -23,7 +23,7 @@ for key,value in freq.items():
         lowest_element = key
 
 print(f"highest = {highest_element},{highest_freq}")
-print(f"lowest = {highest_element},{lowest_freq}")
+print(f"lowest = {lowest_element},{lowest_freq}")
         
 
         

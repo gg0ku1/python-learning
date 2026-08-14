@@ -16,7 +16,13 @@ from database import (
     update_contact
 )
 
+from extensions import db
+
+
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///contacts.db"
+
+db.init_app(app)
 app.secret_key = "supersecretkey"
 
 
