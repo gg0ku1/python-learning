@@ -7,15 +7,6 @@ from flask import (
     flash
 )
 
-from database import (
-    create_database,
-    add_contact,
-    get_contacts,
-    delete_contact,
-    get_contact,
-    update_contact
-)
-
 from extensions import db
 
 from models import Contact
@@ -26,8 +17,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///contacts.db"
 db.init_app(app)
 app.secret_key = "supersecretkey"
 
-
-create_database()
+with app.app_context():
+    db.create_all()
 
 
 @app.route("/")
@@ -50,7 +41,13 @@ def add():
     if not name or not phone or not email:
         return("invalid input, please fill all fields correctly")
 
-    add_contact(name, phone, email)
+    new_contact = Contact(
+    name=name,
+    phone=phone,
+    email=email)
+
+    db.session.add(new_contact)
+    db.session.commit()
 
     flash("Contact added successfully!")
 
@@ -58,19 +55,24 @@ def add():
 
 @app.route("/contacts")
 def view_page():
-    return render_template("contacts.html", contacts = get_contacts())
+    contacts = Contact.query.all()
+    return render_template("contacts.html", contacts=contacts)
 
 @app.route("/delete/<int:id>")
 def delete_page(id):
-    delete_contact(id)
+    contact = db.session.get(Contact, id)
 
+    db.session.delete(contact)
+
+    db.session.commit()
+    
     flash("Contact deleted successfully!")
 
     return redirect(url_for("view_page"))
 
 @app.route("/edit/<int:id>")
 def edit_page(id):
-    contact = get_contact(id)
+    contact = db.session.get(Contact, id)
     return render_template("edit.html", contact=contact)
 
 @app.route("/edit/<int:id>", methods=["POST"])
@@ -86,7 +88,13 @@ def edit(id):
     if not name or not phone or not email:
         return("no input")
 
-    update_contact(id, name, phone, email)
+    contact = db.session.get(Contact, id)
+
+    contact.name = name
+    contact.phone = phone
+    contact.email = email
+
+    db.session.commit()
 
     flash("Contact updated successfully!")
 

@@ -25,20 +25,20 @@
 
         <tr>
 
-            <td>{{ contact[1] }}</td>
-            <td>{{ contact[2] }}</td>
-            <td>{{ contact[3] }}</td>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.phone }}</td>
+            <td>{{ contact.email }}</td>
 
             <td>
 
                 <a
-                href="{{ url_for('edit_page', id=contact[0]) }}"
+                href="{{ url_for('edit_page', id=contact.id) }}"
                 class="btn btn-warning btn-sm me-2">
                     Edit
                 </a>
 
                 <a
-                href="{{ url_for('delete_page', id=contact[0]) }}"
+                href="{{ url_for('delete_page', id=contact.id) }}"
                 class="btn btn-danger btn-sm">
                     Delete
                 </a>
