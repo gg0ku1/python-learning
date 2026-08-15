@@ -18,6 +18,7 @@ from database import (
 
 from extensions import db
 
+from models import Contact
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///contacts.db"
