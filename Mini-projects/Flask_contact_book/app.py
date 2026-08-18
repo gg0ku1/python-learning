@@ -20,6 +20,9 @@ app.secret_key = "supersecretkey"
 with app.app_context():
     db.create_all()
 
+@app.route("/register", methods=["GET", "POST"])
+def register_page():
+    return render_template("register.html")
 
 @app.route("/")
 def home():
@@ -65,7 +68,7 @@ def delete_page(id):
     db.session.delete(contact)
 
     db.session.commit()
-    
+
     flash("Contact deleted successfully!")
 
     return redirect(url_for("view_page"))
