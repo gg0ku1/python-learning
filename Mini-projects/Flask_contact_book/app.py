@@ -9,7 +9,10 @@ from flask import (
 
 from extensions import db
 
-from models import Contact
+from models import Contact, User
+
+from werkzeug.security import generate_password_hash
+
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///contacts.db"
@@ -22,6 +25,23 @@ with app.app_context():
 
 @app.route("/register", methods=["GET", "POST"])
 def register_page():
+
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        hashed_password = generate_password_hash(password)
+
+        new_user = User(
+            username = username,
+            password = hashed_password
+        )
+
+        db.session.add(new_user)
+        db.session.commit
+
+        return redirect(url_for("register_page"))
+        
     return render_template("register.html")
 
 @app.route("/")
