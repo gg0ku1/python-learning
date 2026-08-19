@@ -13,6 +13,8 @@ from models import Contact, User
 
 from werkzeug.security import generate_password_hash
 
+from sqlalchemy.exc import IntegrityError
+
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///contacts.db"
@@ -22,6 +24,8 @@ app.secret_key = "supersecretkey"
 
 with app.app_context():
     db.create_all()
+    print(db.engine.url)
+    print(db.metadata.tables.keys())
 
 @app.route("/register", methods=["GET", "POST"])
 def register_page():
@@ -38,11 +42,20 @@ def register_page():
         )
 
         db.session.add(new_user)
-        db.session.commit
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            flash("Username already exists!")
+            return redirect(url_for("register_page"))
 
         return redirect(url_for("register_page"))
         
     return render_template("register.html")
+
+@app.route("/login", methods=["GET"])
+def login_page():
+    return render_template("login.html")
 
 @app.route("/")
 def home():
