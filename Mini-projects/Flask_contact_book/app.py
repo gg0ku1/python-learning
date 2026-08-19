@@ -4,28 +4,28 @@ from flask import (
     request,
     redirect,
     url_for,
-    flash
+    flash,
+    session
 )
 
 from extensions import db
 
 from models import Contact, User
 
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from sqlalchemy.exc import IntegrityError
+
+from flask_migrate import Migrate
 
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///contacts.db"
 
 db.init_app(app)
+migrate = Migrate(app, db)
 app.secret_key = "supersecretkey"
 
-with app.app_context():
-    db.create_all()
-    print(db.engine.url)
-    print(db.metadata.tables.keys())
 
 @app.route("/register", methods=["GET", "POST"])
 def register_page():
@@ -53,8 +53,23 @@ def register_page():
         
     return render_template("register.html")
 
-@app.route("/login", methods=["GET"])
+
+
+@app.route("/login", methods=["GET", "POST"])
 def login_page():
+
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        user = User.query.filter_by(username=username).first()
+
+        if user and check_password_hash(user.password, password):
+            session["user_id"] = user.id
+            return redirect(url_for("view_page"))
+
+    
+
     return render_template("login.html")
 
 @app.route("/")
@@ -63,10 +78,19 @@ def home():
 
 @app.route("/add", methods=["GET"])
 def add_page():
+    user_id = session.get("user_id")
+
+    if user_id is None:
+        return redirect(url_for("login_page"))
+
     return render_template("add.html")
 
 @app.route("/add", methods=["POST"])
 def add():
+    user_id = session.get("user_id")
+
+    if user_id is None:
+        return redirect(url_for("login_page"))
     name = request.form["name"]
     phone = request.form["phone"]
     email = request.form["email"]
@@ -80,7 +104,8 @@ def add():
     new_contact = Contact(
     name=name,
     phone=phone,
-    email=email)
+    email=email,
+    user_id=user_id)
 
     db.session.add(new_contact)
     db.session.commit()
@@ -89,14 +114,33 @@ def add():
 
     return redirect(url_for("view_page"))
 
+@app.route("/logout", methods=["GET"])
+def logout():
+    session.pop("user_id", None)
+
+    return redirect(url_for("login_page"))
+
 @app.route("/contacts")
 def view_page():
-    contacts = Contact.query.all()
+    user_id = session.get("user_id")
+
+    if user_id is None:
+        return redirect(url_for("login_page"))
+
+    contacts = Contact.query.filter_by(user_id=user_id).all()
+
     return render_template("contacts.html", contacts=contacts)
 
 @app.route("/delete/<int:id>")
 def delete_page(id):
-    contact = db.session.get(Contact, id)
+    user_id = session.get("user_id")
+    contact = Contact.query.filter_by(
+    id=id,
+    user_id=user_id 
+    ).first()
+
+    if contact is None:
+        return redirect(url_for("view_page"))
 
     db.session.delete(contact)
 
@@ -108,8 +152,16 @@ def delete_page(id):
 
 @app.route("/edit/<int:id>")
 def edit_page(id):
-    contact = db.session.get(Contact, id)
+    user_id = session.get("user_id")
+    contact = Contact.query.filter_by(
+    id=id,
+    user_id=user_id
+    ).first()
+    if contact is None:
+            return redirect(url_for("view_page"))
     return render_template("edit.html", contact=contact)
+
+    
 
 @app.route("/edit/<int:id>", methods=["POST"])
 
@@ -124,7 +176,13 @@ def edit(id):
     if not name or not phone or not email:
         return("no input")
 
-    contact = db.session.get(Contact, id)
+    user_id = session.get("user_id")
+    contact = Contact.query.filter_by(
+    id=id,
+    user_id=user_id
+    ).first()
+    if contact is None:
+            return redirect(url_for("view_page"))
 
     contact.name = name
     contact.phone = phone
@@ -135,6 +193,7 @@ def edit(id):
     flash("Contact updated successfully!")
 
     return redirect(url_for("view_page"))
+
 
 
 

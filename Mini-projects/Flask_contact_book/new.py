@@ -1,17 +1,9 @@
 import sqlite3
 
-connection = sqlite3.connect(
-    r"C:\Users\Gokul\Desktop\code\python-learning\instance\contacts.db"
-)
-
+connection = sqlite3.connect(r"instance\contacts.db")
 cursor = connection.cursor()
 
-cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
-
-print(cursor.fetchall())
-
-cursor.execute("SELECT * FROM User")
-
+cursor.execute("PRAGMA table_info(contact)")
 print(cursor.fetchall())
 
 connection.close()
