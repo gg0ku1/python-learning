@@ -26,3 +26,27 @@ right_r_r  = right_r[right_r_mid:]
 
 #base case reached
 
+left = [3, 7, 10]
+right = [1, 5, 8]
+
+temp = []
+i = 0
+j = 0
+
+while i < len(left) and j < len(right):
+    if left[i] < right[j]:
+        temp.append(left[i])
+        i += 1
+
+    elif left[i] > right[j]:
+        temp.append(right[j])
+        j += 1
+
+while i < len(left):
+    temp.append(left[i])
+    i += 1
+
+while j < len(right):
+    temp.append(right[j])
+    j += 1
+
