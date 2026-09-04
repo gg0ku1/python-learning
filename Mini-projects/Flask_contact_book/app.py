@@ -18,6 +18,10 @@ from sqlalchemy.exc import IntegrityError
 
 from flask_migrate import Migrate
 
+from functools import wraps
+
+
+
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///contacts.db"
@@ -26,6 +30,19 @@ db.init_app(app)
 migrate = Migrate(app, db)
 app.secret_key = "supersecretkey"
 
+
+def login_required(func):
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        user_id = session.get("user_id")
+
+        if user_id is None:
+            return redirect(url_for("login_page"))
+
+        return func(*args, **kwargs)
+
+    return wrapper
 
 @app.route("/register", methods=["GET", "POST"])
 def register_page():
@@ -77,20 +94,15 @@ def home():
     return render_template("home.html")
 
 @app.route("/add", methods=["GET"])
+@login_required
 def add_page():
-    user_id = session.get("user_id")
-
-    if user_id is None:
-        return redirect(url_for("login_page"))
-
     return render_template("add.html")
 
 @app.route("/add", methods=["POST"])
+@login_required
 def add():
     user_id = session.get("user_id")
 
-    if user_id is None:
-        return redirect(url_for("login_page"))
     name = request.form["name"]
     phone = request.form["phone"]
     email = request.form["email"]
@@ -121,17 +133,16 @@ def logout():
     return redirect(url_for("login_page"))
 
 @app.route("/contacts")
+@login_required
 def view_page():
     user_id = session.get("user_id")
-
-    if user_id is None:
-        return redirect(url_for("login_page"))
 
     contacts = Contact.query.filter_by(user_id=user_id).all()
 
     return render_template("contacts.html", contacts=contacts)
 
 @app.route("/delete/<int:id>")
+@login_required
 def delete_page(id):
     user_id = session.get("user_id")
     contact = Contact.query.filter_by(
@@ -151,6 +162,7 @@ def delete_page(id):
     return redirect(url_for("view_page"))
 
 @app.route("/edit/<int:id>")
+@login_required
 def edit_page(id):
     user_id = session.get("user_id")
     contact = Contact.query.filter_by(
@@ -158,13 +170,13 @@ def edit_page(id):
     user_id=user_id
     ).first()
     if contact is None:
-            return redirect(url_for("view_page"))
+        return redirect(url_for("view_page"))
     return render_template("edit.html", contact=contact)
 
     
 
 @app.route("/edit/<int:id>", methods=["POST"])
-
+@login_required
 def edit(id):
     name = request.form["name"]
     phone = request.form["phone"]
@@ -182,7 +194,7 @@ def edit(id):
     user_id=user_id
     ).first()
     if contact is None:
-            return redirect(url_for("view_page"))
+        return redirect(url_for("view_page"))
 
     contact.name = name
     contact.phone = phone
