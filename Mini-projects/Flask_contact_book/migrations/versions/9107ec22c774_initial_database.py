@@ -1,8 +1,8 @@
-"""Add user relationship to contacts
+"""Initial database
 
-Revision ID: 65ee6c2e8b21
+Revision ID: 9107ec22c774
 Revises: 
-Create Date: 2026-08-19 20:37:15.710373
+Create Date: 2026-09-04 20:57:35.833114
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '65ee6c2e8b21'
+revision = '9107ec22c774'
 down_revision = None
 branch_labels = None
 depends_on = None

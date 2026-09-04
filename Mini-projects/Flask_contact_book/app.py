@@ -28,6 +28,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///contacts.db"
 
 db.init_app(app)
 migrate = Migrate(app, db)
+with app.app_context():
+    print(db.engine.url)
 app.secret_key = "supersecretkey"
 
 

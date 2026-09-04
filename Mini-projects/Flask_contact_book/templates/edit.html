@@ -4,7 +4,7 @@
 
 <h2 class="mb-4">Edit Contact</h2>
 
-<form action="{{ url_for('edit', id=contact[0]) }}" method="POST">
+<form action="{{ url_for('edit', id=contact.id) }}" method="POST">
 
     <div class="mb-3">
         <label class="form-label">Name</label>
@@ -12,7 +12,7 @@
         <input
             type="text"
             name="name"
-            value="{{ contact[1] }}"
+            value="{{ contact.name }}"
             class="form-control"
             required>
     </div>
@@ -23,7 +23,7 @@
         <input
             type="text"
             name="phone"
-            value="{{ contact[2] }}"
+            value="{{ contact.phone }}"
             class="form-control"
             required>
     </div>
@@ -34,7 +34,7 @@
         <input
             type="email"
             name="email"
-            value="{{ contact[3] }}"
+            value="{{ contact.email }}"
             class="form-control"
             required>
     </div>
