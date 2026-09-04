@@ -22,11 +22,11 @@ def partition(arr, low, high):
 def quick_sort(arr, low, high):
 
     if low < high:
-        pivot = partition(arr, low, high)
+        p_index = partition(arr, low, high)
 
          
-        quick_sort(arr,low,pivot )
-        quick_sort(arr, pivot + 1, high)
+        quick_sort(arr,low,p_index- 1)
+        quick_sort(arr, p_index + 1, high)
 
 array = [7,3,8,2,6,1,5,4]
 
