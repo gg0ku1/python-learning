@@ -18,24 +18,24 @@
 
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="{{ url_for('home') }}">
+            <a class="navbar-brand" href="{{ url_for('contacts.home') }}">
                 📇 Contact Book
             </a>
 
             <div>
 
                 <a class="btn btn-outline-light me-2"
-                href="{{ url_for('home') }}">
+                href="{{ url_for('contacts.home') }}">
                     Home
                 </a>
 
                 <a class="btn btn-outline-light me-2"
-                href="{{ url_for('view_page') }}">
+                href="{{ url_for('contacts.view_page') }}">
                     Contacts
                 </a>
 
                 <a class="btn btn-success"
-                href="{{ url_for('add_page') }}">
+                href="{{ url_for('contacts.add_page') }}">
                     Add Contact
                 </a>
 

@@ -32,13 +32,13 @@
             <td>
 
                 <a
-                href="{{ url_for('edit_page', id=contact.id) }}"
+                href="{{ url_for('contacts.edit_page', id=contact.id) }}"
                 class="btn btn-warning btn-sm me-2">
                     Edit
                 </a>
 
                 <a
-                href="{{ url_for('delete_page', id=contact.id) }}"
+                href="{{ url_for('contacts.delete_page', id=contact.id) }}"
                 class="btn btn-danger btn-sm">
                     Delete
                 </a>
@@ -66,7 +66,7 @@
     </p>
 
     <a
-        href="{{ url_for('add_page') }}"
+        href="{{ url_for('contacts.add_page') }}"
         class="btn btn-success">
         Add Contact
     </a>
