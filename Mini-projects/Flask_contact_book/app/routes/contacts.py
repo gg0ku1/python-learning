@@ -6,6 +6,13 @@ from app.routes.auth import login_required
 
 contacts = Blueprint("contacts", __name__)
 
+def get_contact_data():
+    name = request.form["name"].strip()
+    phone = request.form["phone"].strip()
+    email = request.form["email"].strip()
+
+    return name, phone, email
+
 @contacts.route("/")
 def home():
     return render_template("home.html")
@@ -20,12 +27,7 @@ def add_page():
 def add():
     user_id = session.get("user_id")
 
-    name = request.form["name"]
-    phone = request.form["phone"]
-    email = request.form["email"]
-    name = name.strip()
-    phone = phone.strip()
-    email = email.strip()
+    name, phone, email = get_contact_data()
 
     if not name or not phone or not email:
         flash("Please fill in all fields.")
@@ -90,12 +92,7 @@ def edit_page(id):
 @contacts.route("/edit/<int:id>", methods=["POST"])
 @login_required
 def edit(id):
-    name = request.form["name"]
-    phone = request.form["phone"]
-    email = request.form["email"]
-    name = name.strip()
-    phone = phone.strip()
-    email = email.strip()
+    name, phone, email = get_contact_data() 
 
     if not name or not phone or not email:
         flash("Please fill in all fields.")
