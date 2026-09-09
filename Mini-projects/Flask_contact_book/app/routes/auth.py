@@ -28,6 +28,10 @@ def register_page():
         username = request.form["username"]
         password = request.form["password"]
 
+        username = username.strip()
+        if not username or not password:
+            flash("Username and password are required.")
+            return redirect(url_for("auth.register_page"))
         hashed_password = generate_password_hash(password)
 
         new_user = User(
@@ -43,7 +47,8 @@ def register_page():
             flash("Username already exists!")
             return redirect(url_for("auth.register_page"))
 
-        return redirect(url_for("auth.register_page"))
+        flash("Registration successful! Please log in.")
+        return redirect(url_for("auth.login_page"))
         
     return render_template("register.html")
 
@@ -56,14 +61,23 @@ def login_page():
         username = request.form["username"]
         password = request.form["password"]
 
+        username = username.strip()
+
+        if not username or not password:
+            flash("Username and password are required.")
+            return redirect(url_for("auth.login_page"))
+
         user = User.query.filter_by(username=username).first()
 
         if user and check_password_hash(user.password, password):
             session["user_id"] = user.id
             return redirect(url_for("contacts.view_page"))
+        
+        flash("Invalid username or password.")
+        return redirect(url_for("auth.login_page"))
 
     
-
+    
     return render_template("login.html")
 
 @auth.route("/logout", methods=["GET"])

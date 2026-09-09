@@ -29,15 +29,36 @@
                     Home
                 </a>
 
-                <a class="btn btn-outline-light me-2"
-                href="{{ url_for('contacts.view_page') }}">
-                    Contacts
-                </a>
+                {% if session.get("user_id") %}
 
-                <a class="btn btn-success"
-                href="{{ url_for('contacts.add_page') }}">
-                    Add Contact
-                </a>
+                    <a class="btn btn-outline-light me-2"
+                    href="{{ url_for('contacts.view_page') }}">
+                        Contacts
+                    </a>
+
+                    <a class="btn btn-success me-2"
+                    href="{{ url_for('contacts.add_page') }}">
+                        Add Contact
+                    </a>
+
+                    <a class="btn btn-danger"
+                    href="{{ url_for('auth.logout') }}">
+                        Logout
+                    </a>
+
+                {% else %}
+
+                    <a class="btn btn-primary me-2"
+                    href="{{ url_for('auth.login_page') }}">
+                        Login
+                    </a>
+
+                    <a class="btn btn-success"
+                    href="{{ url_for('auth.register_page') }}">
+                        Register
+                    </a>
+
+                {% endif %}
 
             </div>
 

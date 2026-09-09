@@ -12,6 +12,8 @@
         Store, edit and manage your contacts.
     </p>
 
+{% if session.get("user_id") %}
+
     <a href="{{ url_for('contacts.add_page') }}"
        class="btn btn-success btn-lg me-3">
         ➕ Add Contact
@@ -22,6 +24,19 @@
         📋 View Contacts
     </a>
 
+{% else %}
+
+    <a href="{{ url_for('auth.login_page') }}"
+       class="btn btn-primary btn-lg me-3">
+        🔑 Login
+    </a>
+
+    <a href="{{ url_for('auth.register_page') }}"
+       class="btn btn-success btn-lg">
+        📝 Register
+    </a>
+
+{% endif %}
 </div>
 
 {% endblock %}

@@ -28,7 +28,8 @@ def add():
     email = email.strip()
 
     if not name or not phone or not email:
-        return("invalid input, please fill all fields correctly")
+        flash("Please fill in all fields.")
+        return redirect(url_for("contacts.add_page"))
 
     new_contact = Contact(
     name=name,
@@ -97,7 +98,8 @@ def edit(id):
     email = email.strip()
 
     if not name or not phone or not email:
-        return("no input")
+        flash("Please fill in all fields.")
+        return redirect(url_for("contacts.edit_page", id=id))
 
     user_id = session.get("user_id")
     contact = Contact.query.filter_by(
