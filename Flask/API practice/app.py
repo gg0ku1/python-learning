@@ -21,7 +21,7 @@ def get_contacts():
 
     return jsonify(contacts)
 
-@app.route("/api/contacts/<int:id>", methods=["GET", "PUT","DELETE"])
+@app.route("/api/contacts/<int:id>", methods=["GET", "PUT","PATCH","DELETE"])
 def get_contact(id):
 
     if request.method == "PUT":
@@ -47,6 +47,22 @@ def get_contact(id):
         
         return jsonify({"error": "Contact not found"}), 404
 
+    if request.method == "PATCH":
+        data = request.get_json()
+
+        for contact in contacts:
+            if contact["id"] == id:
+
+                if "name" in data:
+                    contact["name"] = data["name"]
+
+                if "phone" in data:
+                    contact["phone"] = data["phone"]
+
+                return jsonify(contact)
+
+        return jsonify({"error": "Contact not found"}), 404
+
 
     for contact in contacts:
         if contact["id"] == id:
@@ -61,7 +77,7 @@ def create_contact():
     if not data or "name" not in data or "phone" not in data:
         return jsonify({"error": "Name and phone are required"}), 400
     
-    new_id = len(contacts) + 1
+    new_id = max(contact["id"] for contact in contacts) + 1
 
     new_contact = {
         "id": new_id,
