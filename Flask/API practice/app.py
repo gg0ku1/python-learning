@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -28,6 +28,20 @@ def get_contact(id):
             return jsonify(contact)
 
     return jsonify({"error": "Contact not found"}), 404
+
+@app.route("/api/contacts", methods=["POST"])
+def create_contact():
+    data = request.get_json()
+
+    new_contact = {
+        "id": 3,
+        "name": data["name"],
+        "phone": data["phone"]
+    }
+
+    contacts.append(new_contact)
+
+    return jsonify(new_contact), 201
 
 if __name__ == "__main__":
     app.run(debug=True)
