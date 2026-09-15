@@ -27,12 +27,24 @@ def get_contact(id):
     if request.method == "PUT":
         data = request.get_json()
 
+        if not data or "name" not in data or "phone" not in data:
+            return jsonify({"error": "Name and phone are required"}), 400
+
+
         for contact in contacts:
             if contact["id"] == id:
                 contact["name"] = data["name"]
                 contact["phone"] = data["phone"]
                 return jsonify(contact)
 
+        return jsonify({"error": "Contact not found"}), 404
+
+    if request.method == "DELETE":
+        for contact in contacts:
+            if contact["id"] == id:
+                contacts.remove(contact)
+                return jsonify({"message": "Contact deleted"})
+        
         return jsonify({"error": "Contact not found"}), 404
 
 
@@ -46,6 +58,9 @@ def get_contact(id):
 def create_contact():
     data = request.get_json()
 
+    if not data or "name" not in data or "phone" not in data:
+        return jsonify({"error": "Name and phone are required"}), 400
+    
     new_id = len(contacts) + 1
 
     new_contact = {
