@@ -21,8 +21,21 @@ def get_contacts():
 
     return jsonify(contacts)
 
-@app.route("/api/contacts/<int:id>")
+@app.route("/api/contacts/<int:id>", methods=["GET", "PUT","DELETE"])
 def get_contact(id):
+
+    if request.method == "PUT":
+        data = request.get_json()
+
+        for contact in contacts:
+            if contact["id"] == id:
+                contact["name"] = data["name"]
+                contact["phone"] = data["phone"]
+                return jsonify(contact)
+
+        return jsonify({"error": "Contact not found"}), 404
+
+
     for contact in contacts:
         if contact["id"] == id:
             return jsonify(contact)
@@ -33,8 +46,10 @@ def get_contact(id):
 def create_contact():
     data = request.get_json()
 
+    new_id = len(contacts) + 1
+
     new_contact = {
-        "id": 3,
+        "id": new_id,
         "name": data["name"],
         "phone": data["phone"]
     }
