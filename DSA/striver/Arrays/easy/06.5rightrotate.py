@@ -3,23 +3,25 @@
 arr = [1,2,3,4,5,6,7]
 d = 3
 
-temp = arr[:d]
-
 n = len(arr)
+d = d%n
 
-for i in range(d,n):
-    arr[i - d] = arr[i] 
-    i += 1
+temp = arr[n-d:]
 
-for i in range(n-d, n):
-    arr[i] = temp[i-(n-d)]
+for i in range(n-d-1,-1, -1):
+    arr[i+d] = arr[i] 
+
+for i in range(d):
+    arr[i] = temp[i]
 
 print(arr)
 
-#optimal
+#optimal 
 
 arr = [1,2,3,4,5,6,7]
+
 d = 3
+d = d%len(arr)
 
 def reverse(left, right):
     if left >= right:
@@ -29,8 +31,8 @@ def reverse(left, right):
 
 n = len(arr)
 
-reverse(0, d-1)
-reverse(d, n-1)
+reverse(0, n-d-1)
+reverse(n-d, n-1)
 reverse(0, n-1)
 
 print(arr)
