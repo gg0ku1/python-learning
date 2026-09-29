@@ -1,17 +1,19 @@
-# nums = [1, 0, 2, 0, 3, 4]
-# n = len(nums)
-# temp = []
-# for i in range(n):
-#     if nums[i] != 0:
-#         temp.append(nums[i])
+#bruteforce
 
-# for i in range (len(temp)):
-#     nums[i] = temp[i]
+nums = [1, 0, 2, 0, 3, 4]
+n = len(nums)
+temp = []
+for i in range(n):
+    if nums[i] != 0:
+        temp.append(nums[i])
 
-# for i in range(len(temp), n):
-#     nums[i] = 0
+for i in range (len(temp)):
+    nums[i] = temp[i]
 
-# print(nums)
+for i in range(len(temp), n):
+    nums[i] = 0
+
+print(nums)
 
 #optimal
 nums = [1, 0, 2, 0, 3, 4]

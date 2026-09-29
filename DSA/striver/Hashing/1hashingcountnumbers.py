@@ -1,6 +1,6 @@
 #Count frequency of each element in the array
 
-#Problem Statement: Given an array, we have found the number of occurrences of each element in the array.
+#Problem Statement: Given an array, find the number of occurrences of each element in the array.
 
 #brute force 
 arr = [10,5,10,15,10,5]
