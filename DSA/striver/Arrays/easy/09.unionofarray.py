@@ -1,21 +1,21 @@
 # #brute force
 
-# a = [1, 2, 3, 4]
-# b = [3, 4, 5, 6]
+a = [1, 2, 3, 4]
+b = [3, 4, 5, 6]
 
-# union = set()
+union = set()
 
-# for x in a:
-#     union.add(x)
+for x in a:
+    union.add(x)
 
-# for x in b:
-#     union.add(x)
+for x in b:
+    union.add(x)
 
 
 
-# unionarray = list(union)
+unionarray = list(union)
 
-# print(unionarray)
+print(unionarray)
 
 # optimal
 
