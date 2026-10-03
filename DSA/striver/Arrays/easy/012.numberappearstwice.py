@@ -26,7 +26,7 @@ for i in range(len(freq)):
     if freq[i] == 1:
         print(i)
 
-#optimal
+#even better
 
 arr = [4, 1, 2, 1, 2]
 
@@ -42,3 +42,13 @@ for key in freq:
     if freq[key] == 1:
         print(key)
         break
+
+#optimal
+
+result = 0
+
+for x in arr:
+    result = result ^ x
+
+print(result)
+
