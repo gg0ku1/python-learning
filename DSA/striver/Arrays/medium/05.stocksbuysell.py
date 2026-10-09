@@ -24,3 +24,4 @@ for price in prices:
         min_price = price
     else:
         max_profit = max(max_profit, price - min_price)
+
