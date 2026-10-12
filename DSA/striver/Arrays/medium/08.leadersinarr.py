@@ -24,7 +24,7 @@ leaders = []
 curr_lead = float("-inf")
 
 n = len(arr)
-for i in range(n-1, 1, -1):
+for i in range(n-1, -1, -1):
     if arr[i] > curr_lead:
         curr_lead = arr[i]
         leaders.append(arr[i])
