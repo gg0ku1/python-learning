@@ -39,3 +39,27 @@ for i in range(len(arr)):
 
     longest = max(longest,countcurr)
 
+
+#optimal
+
+arr = [100, 4, 200, 1, 3, 2]
+
+longest = 1
+
+setnums = set(arr)
+
+for i in setnums:
+    if i - 1 in setnums:
+        continue
+
+    if i - 1 not in setnums:
+        count = 1
+        x = i
+
+        while x + 1 in setnums:
+            x += 1
+            count += 1
+
+        longest = max(longest, count)
+
+
