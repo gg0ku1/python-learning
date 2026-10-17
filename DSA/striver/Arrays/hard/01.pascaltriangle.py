@@ -6,3 +6,5 @@ def nCr(n, r):
         result = result * (n - i) // (i + 1)
     return result
 
+
+
