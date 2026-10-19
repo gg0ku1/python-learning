@@ -16,7 +16,28 @@ for i in range(1, n):
     ans = ans//i
     print(ans)
 
+#type 3 - print entire pascals triangle for n
 
+def generaterow(n):
+    ans = 1
+    ansrow = []
+    ansrow.append(ans)
+
+    for i in range(1, n):
+        ans = ans * (n - i)
+        ans = ans//i
+        ansrow.append(ans)
+
+    return ansrow
+
+def pascaltriangle(n):
+    triangle = []
+
+    for i in range(1,n+1):
+        ansrow = generaterow(i)
+        triangle.append(ansrow)
+
+    return triangle
 
 
 
