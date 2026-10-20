@@ -12,10 +12,19 @@ for i in range(n):
             if nums[j] == nums[i]:
                 count += 1
 
-            if count > n//3:
-                arr.append(nums[i])
+        if count > n//3:
+            arr.append(nums[i])
 
     if len(arr) == 2:
         break
 
 #better - hashing
+
+ls = []
+freq = {}
+for x in nums:
+    freq[x] = freq[x] + 1
+
+for x, count in freq.items():
+    if count > n // 3:
+        ls.append(x)
