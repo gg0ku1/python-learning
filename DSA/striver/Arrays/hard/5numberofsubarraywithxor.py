@@ -15,3 +15,8 @@ for i in range(len(arr)):
 
     if summ not in hash_map:
         hash_map[summ] = i
+
+
+
+
+        
