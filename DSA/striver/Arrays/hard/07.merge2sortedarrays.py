@@ -11,3 +11,6 @@ while left >= 0 and right < len(arr2) and arr1[left] > arr2[right]:
 
 arr1.sort()
 arr2.sort()
+
+#GAP METHOD
+
