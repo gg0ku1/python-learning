@@ -12,7 +12,11 @@ class Contact(db.Model):
     name = db.Column(db.String(100), nullable=False)
     phone = db.Column(db.String(20), nullable=False)
 
+
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+
     app.run(debug=True)
 
 
