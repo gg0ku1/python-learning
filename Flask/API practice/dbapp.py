@@ -13,6 +13,21 @@ class Contact(db.Model):
     phone = db.Column(db.String(20), nullable=False)
 
 
+@app.route("/contacts", methods=["GET"])
+def get_contacts():
+    contacts = Contact.query.all()
+
+    return {
+        "contacts": [
+            {
+                "id": contact.id,
+                "name": contact.name,
+                "phone": contact.phone
+            }
+            for contact in contacts
+        ]
+    }
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
