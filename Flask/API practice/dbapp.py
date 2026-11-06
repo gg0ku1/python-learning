@@ -98,6 +98,19 @@ def patch_contact(contact_id):
         }
     }, 200
 
+@app.route("/contacts/<int:contact_id>", methods=["DELETE"])
+def delete_contact(contact_id):
+    contact = db.session.get(Contact, contact_id)
+
+    if contact is None:
+        return {"error": "Contact not found"}, 404
+
+    db.session.delete(contact)
+    db.session.commit()
+
+    return {
+        "message": "Contact deleted successfully"
+    }, 200
 
 if __name__ == "__main__":
     with app.app_context():
