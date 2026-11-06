@@ -72,6 +72,33 @@ def update_contact(contact_id):
         }
     }, 200
 
+@app.route("/contacts/<int:contact_id>", methods=["PATCH"])
+def patch_contact(contact_id):
+    contact = db.session.get(Contact, contact_id)
+
+    if contact is None:
+        return {"error": "Contact not found"}, 404
+
+    data = request.get_json()
+
+    if "name" in data:
+        contact.name = data["name"]
+
+    if "phone" in data:
+        contact.phone = data["phone"]
+
+    db.session.commit()
+
+    return {
+        "message": "Contact updated successfully",
+        "contact": {
+            "id": contact.id,
+            "name": contact.name,
+            "phone": contact.phone
+        }
+    }, 200
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
