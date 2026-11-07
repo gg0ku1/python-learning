@@ -43,3 +43,36 @@ for i in range(1, n + 1):
 print("Repeating:", repeating)
 print("Missing:", missing)
 
+#optimal- mathematical method
+
+arr = [3, 1, 2, 5, 3]
+n = len(arr)
+
+# Expected values
+expected_sum = (n * (n + 1)) // 2
+expected_sq_sum = (n * (n + 1) * (2*n + 1)) // 6
+
+# Actual values
+actual_sum = 0
+actual_sq_sum = 0
+
+for num in arr:
+    actual_sum = actual_sum + num
+    actual_sq_sum = actual_sq_sum + num*num
+
+# Equations
+diff = actual_sum - expected_sum       # x - y
+sq_diff = actual_sq_sum - expected_sq_sum  # x² - y²
+
+val1 = diff
+
+val2 = sq_diff//diff
+
+x = (val1 + val2)//2
+y = x - diff
+
+repeating = x
+missing = y
+
+print("Repeating:", repeating)
+print("Missing:", missing)
