@@ -76,3 +76,49 @@ missing = y
 
 print("Repeating:", repeating)
 print("Missing:", missing)
+
+
+#optimal 2 - XOR method
+
+arr = [3, 1, 2, 5, 3]
+n = len(arr)
+
+xor = 0
+
+# Step 1: XOR array elements
+for num in arr:
+    xor ^= num
+
+# Step 2: XOR numbers from 1 to N
+for i in range(1, n + 1):
+    xor ^= i
+
+# Step 3: Isolate rightmost set bit
+bit = xor & -xor
+
+# Step 4: Divide into two groups
+group1 = 0
+group2 = 0
+
+for num in arr:
+    if num & bit:
+        group1 ^= num
+    else:
+        group2 ^= num
+
+for i in range(1, n + 1):
+    if i & bit:
+        group1 ^= i
+    else:
+        group2 ^= i
+
+# Step 5: Identify repeating and missing
+if group1 in arr:
+    repeating = group1
+    missing = group2
+else:
+    repeating = group2
+    missing = group1
+
+print("Repeating:", repeating)
+print("Missing:", missing)
