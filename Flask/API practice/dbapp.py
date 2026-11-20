@@ -30,7 +30,16 @@ def get_contacts():
 
 @app.route("/contacts", methods=["POST"])
 def create_contact():
-    data = request.get_json()
+    data = request.get_json(silent=True)
+
+    if not data:
+        return {"error": "Valid JSON body required"}, 400
+    
+    if "name" not in data or "phone" not in data:
+        return {"error": "Name and phone are required"}, 400
+
+    if not isinstance(data["name"], str) or not isinstance(data["phone"], str):
+        return {"error": "Name and phone must be strings"}, 400
 
     new_contact = Contact(
         name=data["name"],
@@ -48,6 +57,19 @@ def create_contact():
             "phone": new_contact.phone
         }
     }, 201
+
+@app.route("/contacts/<int:contact_id>", methods=["GET"])
+def get_contact(contact_id):
+    contact = db.session.get(Contact, contact_id)
+
+    if contact is None:
+        return {"error": "Contact not found"}, 404
+
+    return {
+        "id": contact.id,
+        "name": contact.name,
+        "phone": contact.phone
+    }, 200
 
 @app.route("/contacts/<int:contact_id>", methods=["PUT"])
 def update_contact(contact_id):
