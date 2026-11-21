@@ -41,6 +41,8 @@ def create_contact():
     if not isinstance(data["name"], str) or not isinstance(data["phone"], str):
         return {"error": "Name and phone must be strings"}, 400
 
+
+
     new_contact = Contact(
         name=data["name"],
         phone=data["phone"]
